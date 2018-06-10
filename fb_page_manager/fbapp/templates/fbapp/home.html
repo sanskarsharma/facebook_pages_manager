@@ -5,7 +5,10 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
 <!-- Compiled and minified JavaScript -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
-        
+
+<!-- For jQuery -->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 </head>
 
@@ -53,13 +56,31 @@
 
 </script>
 
+<script type="text/JavaScript">
+
+    $('#logout').click(function() {
+      console.log('Logout CLICKEEEEEEEEDDDD');
+
+        FB.getLoginStatus(function(response) {
+        
+            if (response && response.status === 'connected') {
+            
+                FB.logout(function(response) {
+                    // document.location='/';
+                });
+            }
+        });
+        
+    });
+
+</script>
+
         <nav>
                 <div class="nav-wrapper">
                   <a href="#" class="brand-logo">Hi, {{user_name}}</a>
                   <ul id="nav-mobile" class="right hide-on-med-and-down">
                     <li><a href="{% url 'fbapp:dashboard' %}">Dash</a></li>
-                    <li><a href="badges.html">Components</a></li>
-                    <li><a href="collapsible.html">JavaScript</a></li>
+                    <li><a id="logout" >Logout</a></li>
                   </ul>
                 </div>
         </nav>
@@ -95,7 +116,7 @@
         </div>
     </div>
 
-    <form id='loginform' action="/pages" method="post">
+    <form id='loginform' action="/dashboard" method="post">
         {% csrf_token %}
         <input id="access_token" type="hidden" name="token">
     </form>

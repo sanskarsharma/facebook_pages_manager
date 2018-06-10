@@ -23,6 +23,6 @@ def dashboard(request):
     details=json.dumps(details.json())
     d2=json.dumps(d2.json())
     print(details)
-    return render(request, "dashboard.html",{'pages': details, 'personal':d2})
+    return render(request, "fbapp/dashboard.html",{'pages': details, 'personal':d2})
 
     #return render(request, "fbapp/dashboard.html")
