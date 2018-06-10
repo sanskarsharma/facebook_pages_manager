@@ -25,7 +25,7 @@ SECRET_KEY = 'wlk+#ckgagbb1v*@7hhe+@w-p-nckomg(vb0oovq!l7lm@&x^&'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["fbapp.pythonanywhere.com"]
 
 
 # Application definition
