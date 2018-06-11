@@ -1,17 +1,70 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Dashboard</title>
-</head>
 
-<body>
+{% extends "fbapp/base.html" %}
 
-<h4>
-    This will be the dashboard
-</h4>
+{%  block content %}
+
+ <div id="main_cont" class="container">
+
+
+
+
+
+
+
+<table id="tabl" class="table thead-dark  table-hover" align="center">
+
+    <thead>
+          <tr>
+              <th>Source</th>
+              <th>Name</th>
+              <th>Address</th>
+              <th>Phone</th>
+              <th>Rating</th>
+              <th>Listed</th>
+              <th>Status</th>
+              <th>Action</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td>Google</td>
+            <td>Test</td>
+            <td>Delhi</td>
+            <td>111-111-1111</td>
+            <td>3/5</td>
+            <td>No</td>
+            <td><i class="material-icons red-text text-darken-4">clear</i></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>Yahoo!</td>
+            <td>Test</td>
+            <td>Delhi</td>
+            <td>111-111-1111</td>
+            <td>4/5</td>
+            <td>No</td>
+            <td><i class="material-icons red-text text-darken-4">clear</i></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>Yelp</td>
+            <td>Test</td>
+            <td>Delhi</td>
+            <td>111-111-1111</td>
+            <td>3/5</td>
+            <td>No</td>
+            <td><i class="material-icons red-text text-darken-4">clear</i></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+
+
+</div>
+
+
+
 
 {{pages}}
 <br><br>
@@ -19,5 +72,5 @@
 <br><br><br><br>
 
 
-</body>
-</html>!
+
+{% endblock %}

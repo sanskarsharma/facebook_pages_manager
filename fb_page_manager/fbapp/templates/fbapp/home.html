@@ -1,125 +1,37 @@
-<html>
 
-<head>
-<!-- Compiled and minified CSS -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
-<!-- Compiled and minified JavaScript -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+{% extends "fbapp/base.html" %}
+       
+    {% block content %}
+                        
 
-<!-- For jQuery -->
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <br><br><br><br>
+<!-- 
+        <fb:login-button 
+        scope="public_profile,email,manage_pages"
+        onlogin="checkLoginState();">
+        </fb:login-button> -->
 
-</head>
+        <br><br><br><br>
 
-<body>
+        <div class="fb-login-button" align="center"
+            data-max-rows="1"
+            data-size="large"
+            data-button-type="continue_with"
+            data-show-faces="false" 
+            data-auto-logout-link="false"
+            data-use-continue-as="false"
+            data-onlogin="checkLoginState();"
+            data-scope="public_profile,email,manage_pages">
 
-<script>
-        window.fbAsyncInit = function() {
-          FB.init({
-            appId      : '478903395879174',
-            cookie     : true,
-            xfbml      : true,
-            version    : 'v3.0'
-          });
-            
-          FB.AppEvents.logPageView();   
-            
-        };
-      
-        (function(d, s, id){
-           var js, fjs = d.getElementsByTagName(s)[0];
-           if (d.getElementById(id)) {return;}
-           js = d.createElement(s); js.id = id;
-           js.src = "https://connect.facebook.net/en_US/sdk.js";
-           fjs.parentNode.insertBefore(js, fjs);
-         }(document, 'script', 'facebook-jssdk'));
-
-    
-    function checkLoginState() {
-        FB.getLoginStatus(function(response) {
-            statusChangeCallback(response);
-        });
-    }
-    function statusChangeCallback(response) {
-  		if(response.status=='connected') {
-  			var accessToken=response.authResponse.accessToken;
-  			document.getElementById("access_token").value=accessToken;
-  			document.getElementById("loginform").submit();
-  		}
-  		// else {
-  		// 	alert('Please login to continue!!!');
-  		// }
-  	}
-
-
-
-</script>
-
-<script type="text/JavaScript">
-
-    $('#logout').click(function() {
-      console.log('Logout CLICKEEEEEEEEDDDD');
-
-        FB.getLoginStatus(function(response) {
-        
-            if (response && response.status === 'connected') {
-            
-                FB.logout(function(response) {
-                    // document.location='/';
-                });
-            }
-        });
-        
-    });
-
-</script>
-
-        <nav>
-                <div class="nav-wrapper">
-                  <a href="#" class="brand-logo">Hi, {{user_name}}</a>
-                  <ul id="nav-mobile" class="right hide-on-med-and-down">
-                    <li><a href="{% url 'fbapp:dashboard' %}">Dash</a></li>
-                    <li><a id="logout" >Logout</a></li>
-                  </ul>
-                </div>
-        </nav>
-                    
-    <div class="container">
-        <div class="row">
-                <div class="col s12" align="center">
-                        <h3> I am here bro</h3>
-
-                        <br><br><br><br>
-
-                        <fb:login-button 
-                        scope="public_profile,email,manage_pages"
-                        onlogin="checkLoginState();">
-                        </fb:login-button>
-
-                        <br><br><br><br>
-
-                        <div class="fb-login-button" 
-                            data-max-rows="1"
-                            data-size="large"
-                            data-button-type="continue_with"
-                            data-show-faces="false" 
-                            data-auto-logout-link="false"
-                            data-use-continue-as="false"
-                            data-onlogin="checkLoginState();"
-                            data-scope="public_profile,email,manage_pages">
-
-                        </div>
-
-
-                </div>
         </div>
-    </div>
 
-    <form id='loginform' action="/fbapp/dashboard" method="post">
-        {% csrf_token %}
-        <input id="access_token" type="hidden" name="token">
-    </form>
-</body>
 
-</html>
+                
+
+        <form id='loginform' action="/fbapp/dashboard" method="post">
+            {% csrf_token %}
+            <input id="access_token" type="hidden" name="token">
+        </form>
+
+
+    {% endblock %}
