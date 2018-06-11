@@ -1,0 +1,12 @@
+{% extends "fbapp/base.html" %}
+
+{% block content %}
+{% load crispy_forms_tags %}
+
+<br><br>
+<form method="post" action= "/update_page" class="uniForm">
+    {{ form_obj | crispy }}
+    <input type="submit" value="Save" class="btn btn-outline-primary "/>
+</form>
+
+{% endblock %}
