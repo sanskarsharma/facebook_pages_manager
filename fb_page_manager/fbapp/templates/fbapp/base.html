@@ -108,8 +108,33 @@
             
         });
 
+        $('#asd').click(function(){
+
+
+
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                    console.log(this.responseText);
+                    
+                    
+                    }
+                };
+                var parm='name=raaajuu' + '&bio=BIOLOGYSTUDENT' + '&csrfmiddlewaretoken=' + '{{csrf_token}}';
+                // console.log(parm);
+                xhttp.open("POST", "/fbapp/update_page", false);
+                xhttp.send(parm);
+            
+
+        });
+
         var x={{ pages|safe }};
         var y={{ personal|safe }};
+        // var mega_details = {{ mega_details|safe}};
+        // console.log("MEGAAAA")
+        // console.log(mega_details)
+        // console.log("MEGAAAA ENDEDDDDD")
+
         // var cf={{ csrf_token }};
         // console.log(csrf);
         // document.getElementById("welcome").innerHTML='Welcome, '+y.name;
@@ -118,7 +143,7 @@
         $.each(x, function (i, v) {
             //list += '<li class="page" id="'+i+'">' + '<a>' + v.name + '</a></li>'
             console.log(v);
-            var button='<td><a href="#modal1" class="waves-effect waves-light btn page modal-trigger" id="' + i + '">Update</a></td></tr>';
+            var button='<td><a target="#my_modal" href="#my_modal" class="btn-outline-primary btn page modal-trigger" id="' + i + '">Update</a></td></tr>';
             var name='<td>' + v.name +'</td>';
             var ph='<td>'+ v.phone + '</td>';
             // var location='<td>' + v.location+'</td>';

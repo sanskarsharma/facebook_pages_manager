@@ -4,9 +4,13 @@
 {% load crispy_forms_tags %}
 
 <br><br>
-<form method="post" action= "/update_page" class="uniForm">
+<form method="post" action= "/fbapp/update_detail">
+    {% csrf_token %}
     {{ form_obj | crispy }}
-    <input type="submit" value="Save" class="btn btn-outline-primary "/>
+    <input id="access_token_for_update" type="hidden" name="access_token" value="qw12qw12">
+    <input id="page_id_for_update" type="hidden" name="page_id">
+    <input type="submit" value="Save" class="btn btn-block btn-outline-primary "/>
 </form>
 
+<br><br><br><br>
 {% endblock %}
