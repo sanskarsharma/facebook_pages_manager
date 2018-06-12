@@ -318,6 +318,22 @@
 
         // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
         $('.page').click(function() {
+            $('input').val('');
+            document.getElementById("modal_edit_button").hidden = true;
+            document.getElementById("general_info").disabled = true;
+            document.getElementById("company_overview").disabled = true;
+            document.getElementById("phone").disabled = true;
+            document.getElementById("about").disabled = true;
+            document.getElementById("bio").disabled = true;
+            document.getElementById("website").disabled = true;
+            document.getElementById("emails").disabled = true;
+            document.getElementById("description").disabled = true;
+            document.getElementById("city").disabled = true;
+            document.getElementById("state").disabled = true;
+            document.getElementById("country").disabled = true;
+            document.getElementById("zip").disabled = true;
+            document.getElementById("street").disabled = true;
+            document.getElementById("editPage").hidden = false;
         var id = $(this).attr('id');
         console.log("HIIIIIIIIIIIIIIIIIIII")
         var xhttp = new XMLHttpRequest();
@@ -325,7 +341,7 @@
         if (this.readyState == 4 && this.status == 200) {
           console.log(this.responseText);
           var res=JSON.parse(this.responseText);
-          $('input').val('');
+          
           document.getElementById('name_modal').innerHTML=res['name'];
           $.each(res, function(key, value) {
               if(key=='location')
