@@ -138,6 +138,7 @@
         $('#editPage').click(function(){
             document.getElementById("modal_edit_button").hidden = false;
             document.getElementById("general_info").disabled = false;
+            document.getElementById("company_overview").disabled = false;
             document.getElementById("phone").disabled = false;
             document.getElementById("about").disabled = false;
             document.getElementById("bio").disabled = false;
@@ -148,6 +149,7 @@
             document.getElementById("state").disabled = false;
             document.getElementById("country").disabled = false;
             document.getElementById("zip").disabled = false;
+            document.getElementById("street").disabled = false;
             document.getElementById("editPage").hidden = true;
         });
 
@@ -324,7 +326,7 @@
           console.log(this.responseText);
           var res=JSON.parse(this.responseText);
           $('input').val('');
-          document.getElementById('name_modal').html=res['name'];
+          document.getElementById('name_modal').innerHTML=res['name'];
           $.each(res, function(key, value) {
               if(key=='location')
               {
