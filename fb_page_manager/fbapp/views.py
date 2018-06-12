@@ -65,7 +65,7 @@ from . import saver
 def get_page_details(request):
     if request.method=="POST":
         print("HELLO")
-        fields='name,general_info,about,bio,impressum,phone,whatsapp_number,emails,website,description,company_overview,displayed_message_response_time,fan_count,link,overall_star_rating,rating_count,verification_status,is_published,location'
+        fields='name,general_info,about,bio,impressum,phone,whatsapp_number,emails,website,description,company_overview,fan_count,link,overall_star_rating,rating_count,location'
         pageToken=request.POST.get("pageToken",'')
         pageId=request.POST.get("pageId",'')
         header='OAuth ' + pageToken
