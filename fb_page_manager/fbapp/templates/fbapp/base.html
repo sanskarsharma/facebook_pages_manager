@@ -18,7 +18,7 @@
 </head>
 
 <body>
-    
+
         <nav class="navbar navbar-expand-sm bg-light navbar-light">
 
             <a class="navbar-brand" href="#">
@@ -32,7 +32,7 @@
                 <li class="nav-item">
                 <a class="nav-link" href="{% url 'fbapp:dashboard' %}">Dash</a>
                 </li>
-                
+
                 <li class="nav-item">
                 <a class="nav-link disabled" id="logout" href="#">Logout</a>
                 </li>
@@ -50,11 +50,11 @@
         xfbml      : true,
         version    : 'v3.0'
         });
-        
-        FB.AppEvents.logPageView();   
-        
+
+        FB.AppEvents.logPageView();
+
     };
-    
+
     (function(d, s, id){
         var js, fjs = d.getElementsByTagName(s)[0];
         if (d.getElementById(id)) {return;}
@@ -96,43 +96,18 @@
             console.log('Logout CLICKEEEEEEEEDDDD');
 
             FB.getLoginStatus(function(response) {
-            
+
                 if (response && response.status === 'connected') {
-                
+
                     FB.logout(function(response) {
                         // document.location='/';
                     });
                 }
             });
-            
-        });
-
-
-        // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
-        $('.page').click(function() {
-        var id = $(this).attr('id');
-
-        var xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-            console.log(this.responseText);
-            var response_dict =JSON.parse(this.responseText);
-
-            $.each(response_dict , function(key, value) {
-                            
-                document.getElementById(key).value=value;
-                
-            });
-            document.getElementById("pageToken").value=x[parseInt(id)].access_token;
-            }
-        };
-        var parm='pageId='+x[parseInt(id)].id + '&pageToken=' + x[parseInt(id)].access_token + '&csrfmiddlewaretoken=' + '{{csrf_token}}';
-        // console.log(parm);
-        xhttp.open("POST", "/fbapp/page_detail", false);
-        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        xhttp.send(parm);
 
         });
+
+
 
 
 
@@ -145,15 +120,15 @@
                 xhttp.onreadystatechange = function() {
                     if (this.readyState == 4 && this.status == 200) {
                     console.log(this.responseText);
-                    
-                    
+
+
                     }
                 };
                 var parm='name=raaajuu' + '&bio=BIOLOGYSTUDENT' + '&csrfmiddlewaretoken=' + '{{csrf_token}}';
                 // console.log(parm);
                 xhttp.open("POST", "/fbapp/update_page", false);
                 xhttp.send(parm);
-            
+
 
         });
 
@@ -172,7 +147,7 @@
         $.each(x, function (i, v) {
             //list += '<li class="page" id="'+i+'">' + '<a>' + v.name + '</a></li>'
             console.log(v);
-            var button='<td><a href="#modal1" class="btn-outline-primary btn page modal-trigger" id="' + i + '">Update</a></td></tr>';
+            var button='<td><button data-toggle="modal" data-target="#modal1" class="btn-outline-primary btn page modal-trigger" id="' + i + '">Update</button></td></tr>';
             var name='<td>' + v.name +'</td>';
             var ph='<td>'+ v.phone + '</td>';
             // var location='<td>' + v.location+'</td>';
@@ -180,7 +155,38 @@
             var row='<tr><td>Facebook</td>'+name+'<td>Delhi</td><td>111-111-1111</td><td>3/5</td><td>No</td><td><i class="material-icons green-text text-darken-4">check</i></td>' + button;
             $('#tabl tr:last').after(row);
         });
-        
+
+
+        // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
+        $('.page').click(function() {
+        var id = $(this).attr('id');
+        console.log("HIIIIIIIIIIIIIIIIIIII")
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+            console.log(this.responseText);
+            var response_dict =JSON.parse(this.responseText);
+
+            $.each(response_dict , function(key, value) {
+
+                document.getElementById(key).value=value;
+
+            });
+            document.getElementById("pageToken").value=x[parseInt(id)].access_token;
+            }
+        };
+        var parm='pageId='+x[parseInt(id)].id + '&pageToken=' + x[parseInt(id)].access_token + '&csrfmiddlewaretoken=' + '{{csrf_token}}';
+        // console.log(parm);
+        xhttp.open("POST", "/fbapp/page_detail", false);
+        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhttp.send(parm);
+
+        });
+
+
+
+
+
 
 
     });
@@ -199,7 +205,7 @@
             </div>
 
         </div>
-        
+
     </div>
 
 
