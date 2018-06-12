@@ -8,7 +8,6 @@ import json
 from . import forms
 # Create your views here.
 
-global_dict ={}
 
 def home(request):
     context = {
@@ -55,7 +54,7 @@ def dashboard(request):
 
 # 		return HttpResponse(details)
 # 	return HttpResponse(400)
-
+from . import saver
 @csrf_exempt
 def get_page_details(request):
     if request.method=="POST":
@@ -67,7 +66,7 @@ def get_page_details(request):
         url="https://graph.facebook.com/"+pageId + "?fields="+fields
         details=call('GET', url, headers={"Authorization": header})
 
-        global_dict["pageId"]= details.json()
+        saver.MyCounter.save(details.json)
 
         details=json.dumps(details.json())
         return HttpResponse(details)
@@ -112,9 +111,9 @@ def get_form(request):
     #         # redirect to a new URL:
     #         return HttpResponseRedirect('/dashboard/')
     # else:
-    
+
     id = request.GET.get("id",'')
-    form = forms.SimpleForm(initial=global_dict[id])
+    form = forms.SimpleForm()
     
     return render(request, 'fbapp/pageform.html', {'form_obj': form})
 

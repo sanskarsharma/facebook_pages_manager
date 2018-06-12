@@ -7,7 +7,7 @@
 <form method="post" action= "/fbapp/update_detail">
     {% csrf_token %}
     {{ form_obj | crispy }}
-    <input id="access_token_for_update" type="hidden" name="access_token" value="qw12qw12">
+    <input id="access_token_for_update" type="hidden" name="access_token" >
     <input id="page_id_for_update" type="hidden" name="page_id">
     <input type="submit" value="Save" class="btn btn-block btn-outline-primary "/>
 </form>

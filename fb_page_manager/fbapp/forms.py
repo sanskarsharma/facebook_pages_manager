@@ -14,13 +14,14 @@ class SimpleForm(forms.Form):
     impressum = forms.CharField(label="Impressum", required=False)
     description = forms.CharField(label="Description", required=False)
     company_overview = forms.CharField(label="Company Overview", required=False)
-    
+    hello = forms.CharField(required=False)
+
     #category = forms.CharField(label="Page Category", required=False)
     
     helper = FormHelper()
     helper.form_method = 'POST'
     helper.layout = Layout(
-        Field("hello", type="hidden")
+        Field("hello", type="hidden", hidden=True)
     )
 
 

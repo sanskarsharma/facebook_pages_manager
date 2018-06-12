@@ -108,6 +108,36 @@
             
         });
 
+
+        // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
+        $('.page').click(function() {
+        var id = $(this).attr('id');
+
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+            console.log(this.responseText);
+            var response_dict =JSON.parse(this.responseText);
+
+            $.each(response_dict , function(key, value) {
+                            
+                document.getElementById(key).value=value;
+                
+            });
+            document.getElementById("pageToken").value=x[parseInt(id)].access_token;
+            }
+        };
+        var parm='pageId='+x[parseInt(id)].id + '&pageToken=' + x[parseInt(id)].access_token + '&csrfmiddlewaretoken=' + '{{csrf_token}}';
+        // console.log(parm);
+        xhttp.open("POST", "/fbapp/page_detail", false);
+        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhttp.send(parm);
+
+        });
+
+
+
+
         $('#asd').click(function(){
 
 
@@ -172,6 +202,126 @@
         </div>
         
     </div>
+
+
+
+<!---------------   Modal Structure  -------------- -->
+<div id="modal1" class="modal modal-fixed-footer">
+        <div class="modal-content">
+          <h4>Page Details</h4>
+          <p><div class="row">
+        <form class="col s12" id="updateData" action="/updatePageDetals method="post">
+          <div class="row">
+            <div class="input-field col s12">
+              <input disabled placeholder="Name" id="name" type="text" class="validate">
+              <label for="name">Name</label>
+            </div>
+            <div class="row">
+            <div class="input-field col s12">
+              <input disabled id="category" type="text" placeholder="Category" class="validate">
+              <label for="category">Category</label>
+            </div>
+          </div>
+            <div class="input-field col s12">
+              <input id="phone" type="text" class="validate" placeholder="Phone">
+              <label for="phone">Phone</label>
+            </div>
+          </div>
+          
+          <div class="row">
+            <div class="input-field col s12">
+              <input id="general_info" type="text" class="validate" placeholder="general_info">
+              <label for="general_info">General Info</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12">
+              <input id="about" type="text" class="validate" placeholder="About">
+              <label for="about">About</label>
+            </div>
+          </div>
+          
+          <div class="row">
+            <div class="col s12">
+              <div class="input-field inline">
+                <input id="emails" type="email" class="validate" placeholder="email">
+                <label for="emails" data-error="wrong" data-success="right">Email</label>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12">
+              <input id="bio" type="text" class="validate" placeholder="Bio">
+              <label for="bio">bio</label>
+            </div>
+          </div>
+          
+          Addess<br><br>
+          <div class="row">
+            <!-- <div class="input-field col s4">
+              <input id="lname" type="text" class="validate" placeholder="lname">
+              <label for="lname">Name</label>
+            </div> -->
+            <div class="input-field col s8">
+              <input id="street" type="text" class="validate" placeholder="street">
+              <label for="street">Street</label>
+            </div>
+            <div class="input-field col s4">
+              <input id="city" type="text" class="validate" placeholder="city">
+              <label for="city">City</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s4">
+              <input id="state" type="text" class="validate" placeholder="state">
+              <label for="state">State</label>
+            </div>
+            <div class="input-field col s4">
+              <input id="country" type="text" class="validate" placeholder="country">
+              <label for="country">Country</label>
+            </div>
+            <div class="input-field col s4">
+              <input id="zip" type="text" class="validate" placeholder="zip">
+              <label for="zip">Zip</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12">
+              <input id="website" type="text" class="validate" placeholder="Website">
+              <label for="website">Website</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12">
+              <input id="description" type="text" class="validate" placeholder="Description">
+              <label for="description">Description</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12">
+              <input id="company_overview" type="text" class="validate" placeholder="Company Overview">
+              <label for="company_overview">Company Overview</label>
+            </div>
+          </div>
+        
+              <input id="id" type="text" class="validate" hidden>
+              <input id="pageToken" type="text" hidden>
+           
+        </form>
+      </div>
+        </div>
+        <div class="modal-footer">
+          <a href="#!" class="modal-action waves-effect waves-green btn-flat" id="update">Update</a>
+        </div>
+      </div>
+
+
+
+
+
+
+
+
 
 
 </body>
