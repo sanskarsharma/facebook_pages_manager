@@ -18,26 +18,31 @@ def home(request):
     return render(request, "fbapp/home.html", context)
 
 def dashboard(request):
-    token=request.POST.get("token",'')
-    header="OAuth "+ token
-    details=call('GET', 'https://graph.facebook.com/me/accounts', headers={"Authorization": header})
-    d2=call('GET','https://graph.facebook.com/me', headers={"Authorization":header})
-    details=json.dumps(details.json())
-    d2=json.dumps(d2.json())
-    print(details)
-    #pages = details["data"]
-    # mega_details = {}
-    # for each_page in pages:
-    #     data_dict = {}
-    #     data_dict["pageToken"] = each_page["access_token"]
-    #     data_dict["pageId"] = each_page["id"]
-    #     res_dict = call("POST", "/fbapp/page_detail", data=data_dict)
-    #     mega_details[each_page["id"]] = res_dict
-    # details = {"data": [{"id": "946102352202285", "perms": ["ADMINISTER", "EDIT_PROFILE", "CREATE_CONTENT", "MODERATE_CONTENT", "CREATE_ADS", "BASIC_ADMIN"], "category": "Community", "access_token": "EAAGzj2LLCQYBAICnFi5k3j4yD6mKfM0yUVQIZAupwpOgwdmCiiMrAx3I7U32gYHZCplwruizxTHZCa5YRzJba1SsUcYr7rUnNM2b630FokZAPYLP0S556EvLPQraaozQeZAos1IYUKSUnZBTxB3ETaoZCivIIKVV9dEDWMiZBY3jfL7UU7r3hHu29OUK5FNBydujucPnwhCKOwZDZD", "name": "Placement Assistance Cell", "category_list": [{"id": "2612", "name": "Community"}]}], "paging": {"cursors": {"after": "OTQ2MTAyMzUyMjAyMjg1", "before": "OTQ2MTAyMzUyMjAyMjg1"}}}
-    # d2 = { "name": "Sanskar Sharma", "id": "123123"}
-
-    return render(request, "fbapp/dashboard.html",{'pages': details, 'personal':d2}) #, 'mega_details': mega_details})
-
+    if(request.method=="POST"):
+        token=request.POST.get("token",'')
+        header="OAuth "+ token
+        details=call('GET', 'https://graph.facebook.com/me/accounts', headers={"Authorization": header})
+        d2=call('GET','https://graph.facebook.com/me', headers={"Authorization":header})
+        details=json.dumps(details.json())
+        d2=json.dumps(d2.json())
+        print(details)
+        #pages = details["data"]
+        # mega_details = {}
+        # for each_page in pages:
+        #     data_dict = {}
+        #     data_dict["pageToken"] = each_page["access_token"]
+        #     data_dict["pageId"] = each_page["id"]
+        #     res_dict = call("POST", "/fbapp/page_detail", data=data_dict)
+        #     mega_details[each_page["id"]] = res_dict
+        # details = {"data": [{"id": "946102352202285", "perms": ["ADMINISTER", "EDIT_PROFILE", "CREATE_CONTENT", "MODERATE_CONTENT", "CREATE_ADS", "BASIC_ADMIN"], "category": "Community", "access_token": "EAAGzj2LLCQYBAICnFi5k3j4yD6mKfM0yUVQIZAupwpOgwdmCiiMrAx3I7U32gYHZCplwruizxTHZCa5YRzJba1SsUcYr7rUnNM2b630FokZAPYLP0S556EvLPQraaozQeZAos1IYUKSUnZBTxB3ETaoZCivIIKVV9dEDWMiZBY3jfL7UU7r3hHu29OUK5FNBydujucPnwhCKOwZDZD", "name": "Placement Assistance Cell", "category_list": [{"id": "2612", "name": "Community"}]}], "paging": {"cursors": {"after": "OTQ2MTAyMzUyMjAyMjg1", "before": "OTQ2MTAyMzUyMjAyMjg1"}}}
+        # d2 = { "name": "Sanskar Sharma", "id": "123123"}
+        return render(request, "fbapp/dashboard.html",{'pages': details, 'personal':d2}) #, 'mega_details': mega_details})
+    else:
+        # here use sessions to save user-id and pageids/tokens
+        details = {}
+        d2 = {}
+        return render(request, "fbapp/dashboard.html",{'pages': details, 'personal':d2}) #, 'mega_details': mega_details})
+       
     #return render(request, "fbapp/dashboard.html")
 
 # @csrf_exempt

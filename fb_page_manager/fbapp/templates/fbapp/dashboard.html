@@ -91,15 +91,38 @@ Google
           Modal body..
 
           <div class="row">
-            <p id="is_published_modal" > </p>
+            <div class="col-sm-4">
+                <label for="is_published_modal"> Publish Status :</label>
+                <p id="is_published_modal" >  </p>
+              </div>
           </div>
+          <div class="row">
+              <div class="col-sm-4">
+                  <label for="displayed_message_response_time_modal"> Displayed message response time :</label>
+                  <p id="displayed_message_response_time_modal" >  </p>
+                </div>
+          </div>
+
+          <div class="row">
+              <div class="col-sm-4">
+                  <label for="general_info_modal"> General info :</label>
+                  <p id="general_info_modal" >  </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4">
+                    <label for="about_modal"> About :</label>
+                    <p id="about_modal" >  </p>
+                  </div>
+            </div>
+
 
 
         </div>
 
         <!-- Modal footer -->
         <div class="modal-footer">
-          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+          <button id="modal_edit_button" type="button" class="btn btn-primary" data-target="_blank">Edit</button>
         </div>
 
         <input id="id" type="text" class="validate" hidden>
