@@ -137,31 +137,157 @@
 
         $('#editPage').click(function(){
             document.getElementById("modal_edit_button").hidden = false;
-            document.getElementById("name").disabled = false;
+            document.getElementById("general_info").disabled = false;
             document.getElementById("phone").disabled = false;
-            document.getElementById("category").disabled = false;
-
+            document.getElementById("about").disabled = false;
+            document.getElementById("bio").disabled = false;
+            document.getElementById("website").disabled = false;
+            document.getElementById("emails").disabled = false;
+            document.getElementById("description").disabled = false;
+            document.getElementById("city").disabled = false;
+            document.getElementById("state").disabled = false;
+            document.getElementById("country").disabled = false;
+            document.getElementById("zip").disabled = false;
+            document.getElementById("editPage").hidden = true;
         });
 
-        $('#modal_edit_button').click(function(){
-
-
-
-                var xhttp = new XMLHttpRequest();
-                xhttp.onreadystatechange = function() {
-                    if (this.readyState == 4 && this.status == 200) {
-                    console.log(this.responseText);
-
-
-                    }
-                };
-                var parm='name=raaajuu' + '&bio=BIOLOGYSTUDENT' + '&csrfmiddlewaretoken=' + '{{csrf_token}}';
-                // console.log(parm);
-                xhttp.open("POST", "/fbapp/update_form", false);
-                xhttp.send(parm);
-
-
+    $('#modal_edit_button').click(function() {
+      //var dr={'access_token':document.getElementById("pageToken").value, 'pageId':document.getElementById("id").value, 'csrfmiddlewaretoken': '{{ csrf_token}}'};
+      var d={'csrfmiddlewaretoken': '{{ csrf_token}}','access_token':document.getElementById("pageToken").value, 'pageId':document.getElementById("id").value};
+      var c=0;
+      var dl={};
+      var flag=1;
+      if(document.getElementById("phone").value != "")
+      {
+        if(document.getElementById("phone").value.length==10 && !isNaN(document.getElementById("phone").value))
+        {
+          d['phone']= document.getElementById("phone").value;
+          c+=1;
+        }
+        else
+        {
+          alert("please enter a valid 10 digit phone number!!!");
+          flag=0;
+        }
+      }
+      if(document.getElementById("general_info").value != "")
+      {
+          c+=1;
+          d['general_info']= document.getElementById("general_info").value; 
+      }
+      if(document.getElementById("about").value != "")
+      {
+          c+=1;
+          d['about']= document.getElementById("about").value; 
+      }
+      if(document.getElementById("bio").value != "")
+      {
+          c+=1;
+          d['bio']= document.getElementById("bio").value; 
+      }
+      if(document.getElementById("website").value != "")
+      {
+        var re = /^(http[s]?:\/\/){0,1}(www\.){0,1}[a-zA-Z0-9\.\-]+\.[a-zA-Z]{2,5}[\.]{0,1}/;
+        if(re.test(document.getElementById("website").value))
+        {
+          c+=1;
+          d['website']= document.getElementById("website").value;
+        }
+        else
+        {
+          alert("please enter a valid website!!!");
+          flag=0;
+        }
+      }
+      if(document.getElementById("emails").value != "")
+      {
+        var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        if(re.test(document.getElementById("emails").value))
+        {
+          c+=1;
+          d['emails']= [document.getElementById("emails").value];
+        }
+        else
+        {
+          alert("please enter a valid email!!!");
+          flag=0;
+        }
+      }
+      if(document.getElementById("description").value != "")
+      {
+          c+=1;
+          d['description']= document.getElementById("description").value; 
+      }
+      if(document.getElementById("company_overview").value != "")
+      {
+          c+=1;
+          d['company_overview']= document.getElementById("company_overview").value; 
+      }
+      
+      if(document.getElementById("city").value != "")
+      {
+          c+=1;
+          dl['city']= document.getElementById("city").value; 
+      }
+      if(document.getElementById("state").value != "")
+      {
+          c+=1;
+          dl['state']= document.getElementById("state").value; 
+      }
+      if(document.getElementById("country").value != "")
+      {
+          c+=1;
+          dl['country']= document.getElementById("country").value; 
+      }
+      if(document.getElementById("street").value != "")
+      {
+          c+=1;
+          dl['street']= document.getElementById("street").value; 
+      }
+      if(document.getElementById("zip").value != "")
+      {
+          c+=1;
+          dl['zip']= document.getElementById("zip").value; 
+      }
+      console.log(d);
+      d['location']= dl;
+      //d = $.param(d);
+      if(c!=0 && flag!=0)
+      {
+       // var xhttp = new XMLHttpRequest();
+       //  xhttp.onreadystatechange = function() {
+       //    if (this.readyState == 4 && this.status == 200) {
+       //      var r=JSON.parse(this.responseText);
+       //      console.log(r);
+       //      if(r['success'])
+       //      {
+       //        alert('done');
+       //      }
+       //      else
+       //      {
+       //        alert(r['error']['message']);
+       //      }
+       //    }
+       //  };
+       //  var url=document.getElementById("id").value;
+       //  xhttp.open("POST", "https://graph.facebook.com/", true);
+       //  xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+       //  xhttp.send(d);
+       var url="/"+document.getElementById("id").value;
+       FB.api(url,'post',d, function(response) {
+          console.log(response);
+          if(response['success'])
+            {
+              alert('done');
+            }
+            else
+            {
+              alert(response['error']['message']);
+            }
         });
+      }
+      
+    });
 
         var x={{ pages|safe }};
         var y={{ personal|safe }};
@@ -197,7 +323,8 @@
         if (this.readyState == 4 && this.status == 200) {
           console.log(this.responseText);
           var res=JSON.parse(this.responseText);
-          document.getElementById('name_modal').value=res['name'];
+          $('input').val('');
+          document.getElementById('name_modal').html=res['name'];
           $.each(res, function(key, value) {
               if(key=='location')
               {
