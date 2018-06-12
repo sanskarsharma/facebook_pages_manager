@@ -136,7 +136,10 @@
 
 
         $('#editPage').click(function(){
-            $("#tabl input").prop("disabled", false);
+            document.getElementById("modal_edit_button").hidden = false;
+            document.getElementById("name").disabled = false;
+            document.getElementById("phone").disabled = false;
+            document.getElementById("category").disabled = false;
 
         });
 
@@ -194,6 +197,7 @@
         if (this.readyState == 4 && this.status == 200) {
           console.log(this.responseText);
           var res=JSON.parse(this.responseText);
+          document.getElementById('name_modal').value=res['name'];
           $.each(res, function(key, value) {
               if(key=='location')
               {
