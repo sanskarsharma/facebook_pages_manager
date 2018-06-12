@@ -10,11 +10,13 @@
 
 
 
+<br><br>
+<table id="tabl" class="table  table-hover" align="center">
 
-<table id="tabl" class="table thead-dark  table-hover" align="center">
-
-    <thead>
+    <thead class="thead-dark">
+            <tr><th><center>Listings</center></th></tr>
           <tr>
+              <th></th>
               <th>Source</th>
               <th>Name</th>
               <th>Address</th>
@@ -24,37 +26,40 @@
               <th>Status</th>
               <th>Action</th>
           </tr>
-        </thead>
+    </thead>
 
         <tbody>
           <tr>
+            <td><i class="fa fa-google" style="font-size:36px" > </i></td>
             <td>Google</td>
             <td>Test</td>
             <td>Delhi</td>
             <td>111-111-1111</td>
             <td>3/5</td>
             <td>No</td>
-            <td><i class="material-icons red-text text-darken-4">clear</i></td>
+            <td><a href="#"><span class="glyphicon glyphicon-ok" style="color:green;"></span></a></td>
             <td></td>
           </tr>
           <tr>
+            <td><i class="fa fa-yahoo" style="font-size:36px" > </i></td>
             <td>Yahoo!</td>
             <td>Test</td>
             <td>Delhi</td>
             <td>111-111-1111</td>
             <td>4/5</td>
             <td>No</td>
-            <td><i class="material-icons red-text text-darken-4">clear</i></td>
+            <td><a href="#"><span class="glyphicon glyphicon-ok"></span></a></td>
             <td></td>
           </tr>
           <tr>
+            <td><i class="fa fa-yelp" style="font-size:36px" > </i></td>
             <td>Yelp</td>
             <td>Test</td>
             <td>Delhi</td>
             <td>111-111-1111</td>
             <td>3/5</td>
             <td>No</td>
-            <td><i class="material-icons red-text text-darken-4">clear</i></td>
+            <td><a href="#"><span class="glyphicon glyphicon-ok"></span></a></td>
             <td></td>
           </tr>
         </tbody>
@@ -66,18 +71,21 @@
 <a id="asd" href="/fbapp/update_form?id=" target="_blank">
 Google
 </a>
-
-{{pages}}
-<br><br>
-{{personal}}
-<br><br><br><br>
+<div class="row">
+    <div class="col-md-12" style="word-wrap:break-word">
+        {{pages}}
+        <br><br>
+        {{personal}}
+        <br><br><br><br>
+    </div>
+</div>
 
 
 <!-- --------------------------------  modal below -------------------- -->
 
  <!-- The Modal -->
- <div class="modal modal-lg" id="modal1">
-    <div class="modal-dialog-centered">
+ <div class=" modal" id="modal1">
+    <div class="modal-dialog modal-lg">
       <div class="modal-content">
 
         <!-- Modal Header -->

@@ -11,7 +11,8 @@ from . import forms
 
 def home(request):
     context = {
-        "user_name" : "chotu"
+        "user_name" : "chotu",
+        "title":"FB Page Manager"
     }
     # my_template = loader.get_template("fbapp/home.html")  # old-way
     # return HttpResponse(my_template.render(context,request))
@@ -36,13 +37,13 @@ def dashboard(request):
         #     mega_details[each_page["id"]] = res_dict
         # details = {"data": [{"id": "946102352202285", "perms": ["ADMINISTER", "EDIT_PROFILE", "CREATE_CONTENT", "MODERATE_CONTENT", "CREATE_ADS", "BASIC_ADMIN"], "category": "Community", "access_token": "EAAGzj2LLCQYBAICnFi5k3j4yD6mKfM0yUVQIZAupwpOgwdmCiiMrAx3I7U32gYHZCplwruizxTHZCa5YRzJba1SsUcYr7rUnNM2b630FokZAPYLP0S556EvLPQraaozQeZAos1IYUKSUnZBTxB3ETaoZCivIIKVV9dEDWMiZBY3jfL7UU7r3hHu29OUK5FNBydujucPnwhCKOwZDZD", "name": "Placement Assistance Cell", "category_list": [{"id": "2612", "name": "Community"}]}], "paging": {"cursors": {"after": "OTQ2MTAyMzUyMjAyMjg1", "before": "OTQ2MTAyMzUyMjAyMjg1"}}}
         # d2 = { "name": "Sanskar Sharma", "id": "123123"}
-        return render(request, "fbapp/dashboard.html",{'pages': details, 'personal':d2}) #, 'mega_details': mega_details})
+        return render(request, "fbapp/dashboard.html",{"title":"Dashboard",'pages': details, 'personal':d2}) #, 'mega_details': mega_details})
     else:
         # here use sessions to save user-id and pageids/tokens
         details = {}
         d2 = {}
-        return render(request, "fbapp/dashboard.html",{'pages': details, 'personal':d2}) #, 'mega_details': mega_details})
-       
+        return render(request, "fbapp/dashboard.html",{"title":"Dashboard",'pages': details, 'personal':d2}) #, 'mega_details': mega_details})
+
     #return render(request, "fbapp/dashboard.html")
 
 # @csrf_exempt
@@ -106,7 +107,7 @@ def get_form(request):
     #         d['description']=request.GET.get('description','')
     #     if request.GET.get('company_overview','') is not None:
     #         d['company_overview']=request.GET.get('company_overview','')
-        
+
     #     form = forms.SimpleForm(initial=d)
 
     #     # check whether it's valid:
@@ -119,7 +120,7 @@ def get_form(request):
 
     id = request.GET.get("id",'')
     form = forms.SimpleForm()
-    
+
     return render(request, 'fbapp/pageform.html', {'form_obj': form})
 
 
@@ -158,7 +159,7 @@ def update_page_details(request):
 		d1['street']=request.POST.get("street")
 	if request.POST.get("zip") is not None:
 		d1['zip']=request.POST.get("zip")
-			
+
 	# d['location']=d1
 	print(d)
 	# header='OAuth ' + pageToken
