@@ -135,6 +135,10 @@
 
 
 
+        $('#editPage').click(function(){
+            $("#target input").prop("disabled", false);
+
+        });
 
         $('#modal_edit_button').click(function(){
 
@@ -187,15 +191,30 @@
         console.log("HIIIIIIIIIIIIIIIIIIII")
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-            console.log(this.responseText);
-            var response_dict =JSON.parse(this.responseText);
-
-            $.each(response_dict , function(key, value) {
-                if(document.getElementById(key+"_modal")){
-                    document.getElementById(key+"_modal").innerHTML=value;
-                }
-            });
+        if (this.readyState == 4 && this.status == 200) {
+          console.log(this.responseText);
+          var res=JSON.parse(this.responseText);
+          $.each(res, function(key, value) {
+              if(key=='location')
+              {
+                // var temp='';
+                $.each(res.location, function(k,v) {
+                  // temp+=k+': '+v+' ';
+                  if(k=='name' || k=='latitude' || k=='longitude')
+                  {
+                    ;
+                  }
+                  else
+                  {
+                    document.getElementById(k).value=v;
+                  }
+                });
+               // document.getElementById(key).value=temp;
+              }
+              else{
+              document.getElementById(key).value=value;
+            }
+          });
 
             document.getElementById("pageToken").value=x[parseInt(id)].access_token;
             }
