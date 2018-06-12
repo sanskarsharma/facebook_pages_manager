@@ -168,10 +168,11 @@
             var response_dict =JSON.parse(this.responseText);
 
             $.each(response_dict , function(key, value) {
-
-                document.getElementById(key).value=value;
-
+                if(document.getElementById(key+"_modal")){
+                document.getElementById(key+"_modal").innerHTML=value;
+                }
             });
+
             document.getElementById("pageToken").value=x[parseInt(id)].access_token;
             }
         };

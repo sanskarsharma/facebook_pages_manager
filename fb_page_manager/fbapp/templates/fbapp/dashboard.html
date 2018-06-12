@@ -76,29 +76,38 @@ Google
 <!-- --------------------------------  modal below -------------------- -->
 
  <!-- The Modal -->
- <div class="modal" id="modal1">
-    <div class="modal-dialog">
+ <div class="modal modal-lg" id="modal1">
+    <div class="modal-dialog-centered">
       <div class="modal-content">
-      
+
         <!-- Modal Header -->
         <div class="modal-header">
-          <h4 class="modal-title">Modal Heading</h4>
+          <h4 class="modal-title" id="name_modal"></h4>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
-        
+
         <!-- Modal body -->
         <div class="modal-body">
           Modal body..
+
+          <div class="row">
+            <p id="is_published_modal" > </p>
+          </div>
+
+
         </div>
-        
+
         <!-- Modal footer -->
         <div class="modal-footer">
           <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
         </div>
-        
+
+        <input id="id" type="text" class="validate" hidden>
+          <input id="pageToken" type="text" hidden>
+
       </div>
     </div>
   </div>
-  
+
 
 {% endblock %}
