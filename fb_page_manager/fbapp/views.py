@@ -11,12 +11,12 @@ from . import forms
 
 def home(request):
     context = {
-        "user_name" : "chotu",
         "title":"FB Page Manager"
     }
     # my_template = loader.get_template("fbapp/home.html")  # old-way
     # return HttpResponse(my_template.render(context,request))
     return render(request, "fbapp/home.html", context)
+
 
 def dashboard(request):
     if(request.method=="POST"):
@@ -60,7 +60,6 @@ def dashboard(request):
 
 # 		return HttpResponse(details)
 # 	return HttpResponse(400)
-from . import saver
 @csrf_exempt
 def get_page_details(request):
     if request.method=="POST":
@@ -71,8 +70,6 @@ def get_page_details(request):
         header='OAuth ' + pageToken
         url="https://graph.facebook.com/"+pageId + "?fields="+fields
         details=call('GET', url, headers={"Authorization": header})
-
-        saver.MyCounter.save(details.json)
 
         details=json.dumps(details.json())
         return HttpResponse(details)

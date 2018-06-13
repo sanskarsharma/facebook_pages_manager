@@ -27,39 +27,27 @@
             <a class="navbar-brand" href="#">
                     <img src="https://cdn3.iconfinder.com/data/icons/rcons-social/32/facebook_fb_social_social_media-512.png" alt="Logo" style="width:40px;">
             </a>
+            <a class="navbar-brand" href="#">
+                Page manager
+            </a>
 
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item ">
-                <a class="nav-link" href="#">About</a>
+                    <a class="nav-link" data-toggle="modal" href="#modal_about_project">About</a>
                 </li>
 
-                {% if title != "FB Page Manager" %}
-                <li class="nav-item">
-                <a class="nav-link" href="{% url 'fbapp:dashboard' %}">Dash</a>
-                </li>
+                {% if title == "Dashboard" %}
 
-                <!-- Dropdown -->
-                <li class="nav-item dropdown">
+                    <li class="nav-item">
+                        <a class="nav-link " id="logout" href="#">Logout</a>
+                    </li>
 
-                  <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-                    Location
-                  </a>
-                  <div class="dropdown-menu">
-                    <a class="dropdown-item" href="#">San Jose, CA</a>
-                    <a class="dropdown-item" href="#">Banglore, IN</a>
-                    <a class="dropdown-item" href="#">Raipur, IN</a>
-                  </div>
-
-                </li>
-
-                <li class="nav-item">
-                <a class="nav-link " id="logout" href="#">Logout</a>
-
-                </li>
                 {% endif %}
+
             </ul>
 
         </nav>
+
 
 
 
@@ -114,6 +102,31 @@
 
     $(document).ready(function(){
 
+        $("#search_input").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $("#tabl tr").filter(function() {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+
+
+        $(".dropdown-item").click(function(){
+            console.log("dropdown clickEEEEEEEEEDDD");
+            var text = $(this).text();
+            console.log(text);
+            document.getElementById("dropdown_text").innerHTML = text;
+
+            var value =  ""
+            if(text != "All Locations"){
+                value =  text.toLowerCase();
+            }
+            $("#tabl tr").filter(function() {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+
+
+        });
+
         $('#logout').click(function() {
             console.log('Logout CLICKEEEEEEEEDDDD');
 
@@ -125,7 +138,7 @@
                          document.location='/';
                     });
                 }
-                                         document.location='/';
+                document.location='/';
 
             });
 
@@ -133,25 +146,32 @@
 
 
 
-
-
         $('#editPage').click(function(){
+
             document.getElementById("modal_edit_button").hidden = false;
+            document.getElementById("editPage").hidden = true;
+
             document.getElementById("general_info").disabled = false;
             document.getElementById("company_overview").disabled = false;
-            document.getElementById("phone").disabled = false;
             document.getElementById("about").disabled = false;
             document.getElementById("bio").disabled = false;
+            document.getElementById("description").disabled = false;
+            document.getElementById("impressum").disabled = false;
+
+            document.getElementById("phone").disabled = false;
             document.getElementById("website").disabled = false;
             document.getElementById("emails").disabled = false;
-            document.getElementById("description").disabled = false;
+            document.getElementById("whatsapp_number").disabled = false;
+
+
             document.getElementById("city").disabled = false;
             document.getElementById("state").disabled = false;
             document.getElementById("country").disabled = false;
             document.getElementById("zip").disabled = false;
             document.getElementById("street").disabled = false;
-            document.getElementById("editPage").hidden = true;
         });
+
+
 
     $('#modal_edit_button').click(function() {
       //var dr={'access_token':document.getElementById("pageToken").value, 'pageId':document.getElementById("id").value, 'csrfmiddlewaretoken': '{{ csrf_token}}'};
@@ -159,6 +179,7 @@
       var c=0;
       var dl={};
       var flag=1;
+
       if(document.getElementById("phone").value != "")
       {
         if(document.getElementById("phone").value.length==10 && !isNaN(document.getElementById("phone").value))
@@ -168,25 +189,27 @@
         }
         else
         {
-          alert("please enter a valid 10 digit phone number!!!");
+          alert("Please enter a valid 10 digit phone number!");
           flag=0;
         }
       }
-      if(document.getElementById("general_info").value != "")
+
+
+      if(document.getElementById("whatsapp_number").value != "")
       {
+        if(document.getElementById("whatsapp_number").value.length==10 && !isNaN(document.getElementById("whatsapp_number").value))
+        {
+          d['whatsapp_number']= document.getElementById("whatsapp_number").value;
           c+=1;
-          d['general_info']= document.getElementById("general_info").value; 
+        }
+        else
+        {
+          alert("Please enter a valid 10 digit phone number for Whatsapp!");
+          flag=0;
+        }
       }
-      if(document.getElementById("about").value != "")
-      {
-          c+=1;
-          d['about']= document.getElementById("about").value; 
-      }
-      if(document.getElementById("bio").value != "")
-      {
-          c+=1;
-          d['bio']= document.getElementById("bio").value; 
-      }
+
+
       if(document.getElementById("website").value != "")
       {
         var re = /^(http[s]?:\/\/){0,1}(www\.){0,1}[a-zA-Z0-9\.\-]+\.[a-zA-Z]{2,5}[\.]{0,1}/;
@@ -197,10 +220,12 @@
         }
         else
         {
-          alert("please enter a valid website!!!");
+          alert("Please enter a valid website URL !");
           flag=0;
         }
       }
+
+
       if(document.getElementById("emails").value != "")
       {
         var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -211,46 +236,80 @@
         }
         else
         {
-          alert("please enter a valid email!!!");
+          alert("Please enter a valid email ID");
           flag=0;
         }
       }
+
+
+      if(document.getElementById("general_info").value != "")
+      {
+          c+=1;
+          d['general_info']= document.getElementById("general_info").value;
+      }
+
+      if(document.getElementById("about").value != "")
+      {
+          c+=1;
+          d['about']= document.getElementById("about").value;
+      }
+
+
+      if(document.getElementById("bio").value != "")
+      {
+          c+=1;
+          d['bio']= document.getElementById("bio").value;
+      }
+
+
       if(document.getElementById("description").value != "")
       {
           c+=1;
-          d['description']= document.getElementById("description").value; 
+          d['description']= document.getElementById("description").value;
       }
+
       if(document.getElementById("company_overview").value != "")
       {
           c+=1;
-          d['company_overview']= document.getElementById("company_overview").value; 
+          d['company_overview']= document.getElementById("company_overview").value;
       }
-      
+
+      if(document.getElementById("impressum").value != "")
+      {
+          c+=1;
+          d['impressum']= document.getElementById("impressum").value;
+      }
+
+
+
+
       if(document.getElementById("city").value != "")
       {
           c+=1;
-          dl['city']= document.getElementById("city").value; 
+          dl['city']= document.getElementById("city").value;
       }
       if(document.getElementById("state").value != "")
       {
           c+=1;
-          dl['state']= document.getElementById("state").value; 
+          dl['state']= document.getElementById("state").value;
       }
       if(document.getElementById("country").value != "")
       {
           c+=1;
-          dl['country']= document.getElementById("country").value; 
+          dl['country']= document.getElementById("country").value;
       }
       if(document.getElementById("street").value != "")
       {
           c+=1;
-          dl['street']= document.getElementById("street").value; 
+          dl['street']= document.getElementById("street").value;
       }
       if(document.getElementById("zip").value != "")
       {
           c+=1;
-          dl['zip']= document.getElementById("zip").value; 
+          dl['zip']= document.getElementById("zip").value;
       }
+
+
       console.log(d);
       d['location']= dl;
       //d = $.param(d);
@@ -288,8 +347,9 @@
             }
         });
       }
-      
+
     });
+
 
         var x={{ pages|safe }};
         var y={{ personal|safe }};
@@ -311,29 +371,36 @@
             var ph='<td>'+ v.phone + '</td>';
             // var location='<td>' + v.location+'</td>';
             // console.log(v.location);
-            var row='<tr><td> <i class="fa fa-facebook-official" style="font-size:36px; padding: 4px; background: #3b5998; color: white;"></i> </td>  <td>Facebook</td>'+name+'<td>Raipur</td><td>9876543210</td><td>4/5</td><td>No</td><td><i class="material-icons green-text text-darken-4">check</i></td>' + button;
+            var row='<tr><td> <i class="fa fa-facebook-official" style="font-size:36px; padding: 4px; background: #3b5998; color: white;"></i> </td>  <td>Facebook</td>'+name+'<td>7 race course road, NDLS</td><td>FB City</td><td>9876543210</td><td>4/5</td><td>No</td><td><i class="material-icons green-text text-darken-4">check</i></td>' + button;
             $('#tabl tr:last').after(row);
         });
+
 
 
         // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
         $('.page').click(function() {
             $('input').val('');
             document.getElementById("modal_edit_button").hidden = true;
+
             document.getElementById("general_info").disabled = true;
             document.getElementById("company_overview").disabled = true;
-            document.getElementById("phone").disabled = true;
             document.getElementById("about").disabled = true;
             document.getElementById("bio").disabled = true;
+            document.getElementById("impressum").disabled = true;
+            document.getElementById("description").disabled = true;
+
+            document.getElementById("phone").disabled = true;
             document.getElementById("website").disabled = true;
             document.getElementById("emails").disabled = true;
-            document.getElementById("description").disabled = true;
+            document.getElementById("whatsapp_number").disabled = true;
+
             document.getElementById("city").disabled = true;
             document.getElementById("state").disabled = true;
             document.getElementById("country").disabled = true;
             document.getElementById("zip").disabled = true;
             document.getElementById("street").disabled = true;
             document.getElementById("editPage").hidden = false;
+
         var id = $(this).attr('id');
         console.log("HIIIIIIIIIIIIIIIIIIII")
         var xhttp = new XMLHttpRequest();
@@ -341,8 +408,9 @@
         if (this.readyState == 4 && this.status == 200) {
           console.log(this.responseText);
           var res=JSON.parse(this.responseText);
-          
+
           document.getElementById('name_modal').innerHTML=res['name'];
+
           $.each(res, function(key, value) {
               if(key=='location')
               {
@@ -361,8 +429,8 @@
                // document.getElementById(key).value=temp;
               }
               else{
-              document.getElementById(key).value=value;
-            }
+                  document.getElementById(key).value=value;
+              }
           });
 
             document.getElementById("pageToken").value=x[parseInt(id)].access_token;
@@ -400,6 +468,51 @@
         </div>
 
     </div>
+
+
+
+<!-- modal about project here  -->
+
+    <div id="modal_about_project" class="modal fade" >
+        <div class="modal-dialog  ">
+                <div class="modal-content">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">
+                            About this app
+                        </h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        This is an app for managing primary information of Facebook Pages of any FB user account.
+                        <br>
+                        It is made upon python Django framework and uses Bootstrap-4/jQuery on the frontend.
+                        <br>
+                        Facebook's Graph API and Javascript SDK are used to connect to facebook.
+                        <br>
+                        This app does not log any user or page data, infact it does not uses a database.
+                        <br>
+                        Developed by <a href="https://github.com/sanskarsharma">sanskarsharma</a>
+                    </div>
+
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    </div>
+
+                </div>
+
+        </div>
+    </div>
+
+
+
+
+
+
 
 
 </body>

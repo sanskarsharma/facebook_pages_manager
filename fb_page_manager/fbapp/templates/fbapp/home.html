@@ -1,37 +1,50 @@
 
 {% extends "fbapp/base.html" %}
-       
+
     {% block content %}
-                        
+
 
         <br><br><br><br>
-<!-- 
-        <fb:login-button 
+<!--
+        <fb:login-button
         scope="public_profile,email,manage_pages"
         onlogin="checkLoginState();">
         </fb:login-button> -->
 
         <br><br><br><br>
 
-        <div class="fb-login-button" align="center"
-            data-max-rows="1"
-            data-size="large"
-            data-button-type="continue_with"
-            data-show-faces="false" 
-            data-auto-logout-link="false"
-            data-use-continue-as="false"
-            data-onlogin="checkLoginState();"
-            data-scope="public_profile,email,manage_pages">
+<div class="row">
+    <div class="col-md-12">
+
+        <div align="center">
+
+
+            <div class="fb-login-button" align="center"
+                data-max-rows="1"
+                data-size="large"
+                data-button-type="continue_with"
+                data-show-faces="false"
+                data-auto-logout-link="false"
+                data-use-continue-as="false"
+                data-onlogin="checkLoginState();"
+                data-scope="public_profile,email,manage_pages">
+
+            </div>
+
 
         </div>
 
+    </div>
 
-                
-
-        <form id='loginform' action="/fbapp/dashboard" method="post">
-            {% csrf_token %}
-            <input id="access_token" type="hidden" name="token">
-        </form>
+</div>
 
 
-    {% endblock %}
+
+
+    <form id='loginform' action="/fbapp/dashboard" method="post">
+        {% csrf_token %}
+        <input id="access_token" type="hidden" name="token">
+    </form>
+
+
+  {% endblock %}

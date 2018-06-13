@@ -8,18 +8,47 @@
 
 
 
+<br>
+    <p style="font-size: 24px;">Listings</p>
+
+<div class="row">
+  <div class="col-md-10">
+    <input class="form-control" id="search_input" type="text" placeholder="Search Listings..">
+  </div>
+  <div class="col-md-2" align="end">
+      <div class="dropdown">
+          <button type="button" id = "dropdown_text" class="btn btn-md btn-outline-primary dropdown-toggle" data-toggle="dropdown">
+          San Jose, CA
+          </button>
+          <div class="dropdown-menu">
+              <a class="dropdown-item" href="#">San Jose, CA</a>
+              <a class="dropdown-item" href="#">Banglore, IN</a>
+              <a class="dropdown-item" href="#">Raipur, IN</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#">All Locations</a>
+              <a class="dropdown-item" href="#">FB City</a>
+
+            </div>
+        </div>
+  </div>
+</div>
+
+<br>
 
 
-<br><br>
-<table id="tabl" class="table  table-hover" align="center">
 
-    <thead class="thead-dark">
-            <tr><th><center>Listings</center></th></tr>
+
+
+<table id="tabl" class="table  table-hover table-responsive" align="center">
+
+    <thead class="border rounded-top " style="background:'#D3D3D3';">
+            <!-- <tr><th><center>Listings</center></th></tr> -->
           <tr>
               <th></th>
               <th>Source</th>
               <th>Name</th>
               <th>Address</th>
+              <th>City</th>
               <th>Phone</th>
               <th>Rating</th>
               <th>Listed</th>
@@ -32,20 +61,22 @@
           <tr>
             <td><i class="fa fa-google" style="font-size:36px" > </i></td>
             <td>Google</td>
-            <td>Test</td>
-            <td>Delhi</td>
+            <td>ABC Dental</td>
+            <td>Street 2, Central Avenue</td>
+            <td>San Jose, CA</td>
             <td>111-111-1111</td>
             <td>3/5</td>
-            <td>No</td>
+            <td>Yes</td>
             <td><a href="#"><span class="glyphicon glyphicon-ok" style="color:green;"></span></a></td>
             <td></td>
           </tr>
           <tr>
             <td><i class="fa fa-yahoo" style="font-size:36px" > </i></td>
             <td>Yahoo!</td>
-            <td>Test</td>
-            <td>Delhi</td>
-            <td>111-111-1111</td>
+            <td>ABC Dental Care</td>
+            <td>221-b, Baker Street</td>
+            <td>Banglore, IN</td>
+            <td>223.222.2222</td>
             <td>4/5</td>
             <td>No</td>
             <td><a href="#"><span class="glyphicon glyphicon-ok"></span></a></td>
@@ -54,31 +85,34 @@
           <tr>
             <td><i class="fa fa-yelp" style="font-size:36px" > </i></td>
             <td>Yelp</td>
-            <td>Test</td>
-            <td>Delhi</td>
-            <td>111-111-1111</td>
+            <td>ABC Dental Hospital</td>
+            <td>C2, Amrapali Sapphire</td>
+            <td>Raipur, IN</td>
+            <td>3333-333-3333</td>
             <td>3/5</td>
             <td>No</td>
             <td><a href="#"><span class="glyphicon glyphicon-ok"></span></a></td>
             <td></td>
           </tr>
         </tbody>
+
+
       </table>
 
 
 </div>
 
-<a id="asd" href="/fbapp/update_form?id=" target="_blank">
-Google
-</a>
-<div class="row">
-    <div class="col-md-12" style="word-wrap:break-word">
-        {{pages}}
-        <br><br>
-        {{personal}}
-        <br><br><br><br>
-    </div>
-</div>
+<!--<a id="asd" href="/fbapp/update_form?id=" target="_blank">-->
+<!--Google-->
+<!--</a>-->
+<!--<div class="row">-->
+<!--    <div class="col-md-12" style="word-wrap:break-word">-->
+<!--        {{pages}}-->
+<!--        <br><br>-->
+<!--        {{personal}}-->
+<!--        <br><br><br><br>-->
+<!--    </div>-->
+<!--</div>-->
 
 
 <!-- --------------------------------  modal below -------------------- -->
@@ -95,122 +129,27 @@ Google
         </div>
 
         <div>
-          <form class="col s12" id="updateData" action="/updatePageDetals method="post">
+          <form class="col s12" id="updateData" action="/updatePageDetals" method="post">
 
           <br>
 
-          <div class="row">
+
             <div class="input-field col s12">
-              <input disabled placeholder="Name" id="name" type="text" class="validate">
               <label for="name">Name</label>
+              <input disabled placeholder="Name" id="name" type="text" class="validate">
+            </div>
+
+            <div class="row">
+                <div class="input-field col s12">
+                  <input disabled id="category" type="text" placeholder="Category" class="validate">
+                  <label for="category">Category</label>
+                </div>
             </div>
 
             <div class="row">
             <div class="input-field col s12">
-              <input disabled id="category" type="text" placeholder="Category" class="validate">
-              <label for="category">Category</label>
-            </div>
-
-          </div>
-            <div class="input-field col s12">
-              <input disabled id="phone" type="text" class="validate" placeholder="Phone">
-              <label for="phone">Phone</label>
-            </div>
-            </div>
-
-          <div class="row">
-            <div class="input-field col s12">
-              <input disabled id="general_info" type="text" class="validate" placeholder="general_info">
-              <label for="general_info">General Info</label>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="input-field col s12">
-              <input disabled id="about" type="text" class="validate" placeholder="About">
-              <label for="about">About</label>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col s12">
-              <div class="input-field inline">
-                <input disabled id="emails" type="email" class="validate" placeholder="email">
-                <label for="emails" data-error="wrong" data-success="right">Email</label>
-              </div>
-            </div>
-            </div>
-
-
-          <div class="row">
-            <div class="input-field col s12">
-              <input disabled id="bio" type="text" class="validate" placeholder="Bio">
-              <label for="bio">bio</label>
-            </div>
-          </div>
-
-
-
-          Address<br><br>
-          <div class="row">
-            <!-- <div class="input-field col s4">
-              <input id="lname" type="text" class="validate" placeholder="lname">
-              <label for="lname">Name</label>
-            </div> -->
-            <div class="input-field col s8">
-              <input disabled id="street" type="text" class="validate" placeholder="street">
-              <label for="street">Street</label>
-            </div>
-            <div class="input-field col s4">
-              <input disabled id="city" type="text" class="validate" placeholder="city">
-              <label for="city">City</label>
-            </div>
-          </div>
-          <div class="row">
-            <div class="input-field col s4">
-              <input disabled id="state" type="text" class="validate" placeholder="state">
-              <label for="state">State</label>
-            </div>
-            <div class="input-field col s4">
-              <input disabled id="country" type="text" class="validate" placeholder="country">
-              <label for="country">Country</label>
-            </div>
-            <div class="input-field col s4">
-              <input disabled id="zip" type="text" class="validate" placeholder="zip">
-              <label for="zip">Zip</label>
-            </div>
-          </div>
-
-
-
-
-          <div class="row">
-            <div class="input-field col s12">
-              <input disabled id="website" type="text" class="validate" placeholder="Website">
-              <label for="website">Website</label>
-            </div>
-
-
-          </div>
-          <div class="row">
-            <div class="input-field col s12">
-              <input disabled id="description" type="text" class="validate" placeholder="Description">
-              <label for="description">Description</label>
-            </div>
-          </div>
-
-
-          <div class="row">
-            <div class="input-field col s12">
-              <input disabled id="company_overview" type="text" class="validate" placeholder="Company Overview">
-              <label for="company_overview">Company Overview</label>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="input-field col s12">
               <input disabled id="overall_star_rating" type="text" class="validate" placeholder="Ratings">
-              <label for="overall_star_rating">Ratings</label>
+              <label for="overall_star_rating"> Star Ratings</label>
             </div>
           </div>
 
@@ -219,8 +158,9 @@ Google
               <input disabled id="rating_count" type="text" class="validate" placeholder="Rating Count">
               <label for="rating_count">Rating Count</label>
             </div>
-
           </div>
+
+
           <div class="row">
             <div class="input-field col s12">
               <input disabled id="fan_count" type="text" class="validate" placeholder="Fan Count">
@@ -228,12 +168,140 @@ Google
             </div>
           </div>
 
+
           <div class="row">
             <div class="input-field col s12">
               <input disabled id="link" type="text" class="validate" placeholder="Link">
               <label for="link">Link</label>
             </div>
           </div>
+
+
+
+            <div class="row">
+                <div class="input-field col-sm-12">
+                  <label for="phone">Phone Number</label>
+                  <input disabled id="phone" type="text" class="validate rounded" placeholder="Phone">
+                </div>
+             </div>
+
+             <div class="row">
+                <div class="input-field col-sm-12">
+                  <label for="whatsapp_number">Whatsapp Number</label>
+                  <input disabled id="whatsapp_number" type="text" class="validate rounded" placeholder="whatsapp_number">
+                </div>
+             </div>
+
+
+                <div class="row">
+                <div class="input-field col s12">
+                    <label for="website">Website</label>
+                  <input disabled id="website" type="text" class="validate" placeholder="Website">
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col s12">
+                  <div class="input-field inline">
+                      <label for="emails" data-error="wrong" data-success="right">Email</label>
+                    <input disabled id="emails" type="email" class="validate" placeholder="email">
+                  </div>
+                </div>
+                </div>
+
+
+
+
+
+              <div class="row">
+                <div class="input-field col s12">
+                  <label for="general_info">General Info</label>
+                  <input disabled id="general_info" type="text" class="validate" placeholder="general_info">
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="input-field col s12">
+                    <label for="about">About</label>
+                  <input disabled id="about" type="text" class="validate" placeholder="About">
+                </div>
+              </div>
+
+
+              <div class="row">
+                <div class="input-field col s12">
+                    <label for="bio">Bio</label>
+                  <input disabled id="bio" type="text" class="validate" placeholder="Bio">
+                </div>
+              </div>
+
+             <div class="row">
+                <div class="input-field col s12">
+                    <label for="description">Description</label>
+                  <input disabled id="description" type="text" class="validate" placeholder="Description">
+                </div>
+              </div>
+
+
+              <div class="row">
+                <div class="input-field col s12">
+                    <label for="company_overview">Company Overview</label>
+                  <input disabled id="company_overview" type="text" class="validate" placeholder="Company Overview">
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="input-field col s12">
+                    <label for="impressum">Impressum</label>
+                  <input disabled id="impressum" type="text" class="validate" placeholder="impressum">
+                </div>
+              </div>
+
+
+
+
+
+
+
+               Address<br>
+
+          <div class="row">
+                 <div class="input-field col s4">
+                  <input id="lname" type="text" class="validate" placeholder="lname">
+                  <label for="lname">Name</label>
+                </div>
+
+                <div class="input-field col s8">
+                  <input disabled id="street" type="text" class="validate" placeholder="street">
+                  <label for="street">Street</label>
+                </div>
+
+                <div class="input-field col s4">
+                  <input disabled id="city" type="text" class="validate" placeholder="city">
+                  <label for="city">City</label>
+                </div>
+          </div>
+
+          <div class="row">
+                <div class="input-field col s4">
+                  <input disabled id="state" type="text" class="validate" placeholder="state">
+                  <label for="state">State</label>
+                </div>
+
+                <div class="input-field col s4">
+                  <input disabled id="country" type="text" class="validate" placeholder="country">
+                  <label for="country">Country</label>
+                </div>
+
+                <div class="input-field col s4">
+                  <input disabled id="zip" type="text" class="validate" placeholder="zip">
+                  <label for="zip">Zip</label>
+                </div>
+          </div>
+
+
+
+
 
           <input id="id" type="text" class="validate" hidden>
           <input id="pageToken" type="text" hidden>
