@@ -26,7 +26,7 @@ def dashboard(request):
         d2=call('GET','https://graph.facebook.com/me', headers={"Authorization":header})
         details=json.dumps(details.json())
         d2=json.dumps(d2.json())
-        print(details)
+        #print(details)
         #pages = details["data"]
         # mega_details = {}
         # for each_page in pages:
@@ -46,20 +46,6 @@ def dashboard(request):
 
     #return render(request, "fbapp/dashboard.html")
 
-# @csrf_exempt
-# def get_page_details(request):
-# 	if request.method=='POST':
-# 		fields='name,general_info,about,bio,impressum,phone,whatsapp_number,emails,website,description,company_overview,displayed_message_response_time,fan_count,link,overall_star_rating,rating_count,verification_status,is_published'
-#         # category, location
-# 		pageToken=request.POST.get("pageToken",'')
-# 		pageId=request.POST.get("pageId",'')
-# 		header='OAuth ' + pageToken
-# 		url="https://graph.facebook.com/"+pageId + "?fields="+fields
-# 		details=call('GET', url, headers={"Authorization": header})
-# 		details=json.dumps(details.json())
-
-# 		return HttpResponse(details)
-# 	return HttpResponse(400)
 @csrf_exempt
 def get_page_details(request):
     if request.method=="POST":
@@ -75,6 +61,7 @@ def get_page_details(request):
         return HttpResponse(details)
     return HttpResponse(400)
 
+#not used
 def get_form(request):
     # # if this is a POST request we need to process the form data
     # if request.method == 'POST':
@@ -120,49 +107,4 @@ def get_form(request):
 
     return render(request, 'fbapp/pageform.html', {'form_obj': form})
 
-
-
-def update_page_details(request):
-	d={}
-	pageToken=request.POST.get("access_token",'')
-	pageId=request.POST.get("page_id",'')
-	d1={}
-	d['access_token']=pageToken
-	if request.POST.get("phone") is not None:
-		d['phone']=request.POST.get("phone",'')
-	if request.POST.get("emails") is not None:
-		d['emails']=request.POST.get("emails",'')
-	if request.POST.get("general_info") is not None:
-		d['general_info']=request.POST.get("general_info",'')
-	if request.POST.get("about") is not None:
-		d['about']=request.POST.get("about",'')
-	if request.POST.get("bio") is not None:
-		d['bio']=request.POST.get("bio",'')
-	if request.POST.get("website") is not None:
-		d['website']=request.POST.get("website",'')
-	if request.POST.get("description") is not None:
-		d['description']=request.POST.get("description",'')
-	if request.POST.get("company_overview") is not None:
-		d['company_overview']=request.POST.get("company_overview",'')
-	if request.POST.get("lname") is not None:
-		d1['name']=request.POST.get("lname")
-	if request.POST.get("city") is not None:
-		d1['city']=request.POST.get("city")
-	if request.POST.get("state") is not None:
-		d1['state']=request.POST.get("state")
-	if request.POST.get("country") is not None:
-		d1['country']=request.POST.get("country")
-	if request.POST.get("street") is not None:
-		d1['street']=request.POST.get("street")
-	if request.POST.get("zip") is not None:
-		d1['zip']=request.POST.get("zip")
-
-	# d['location']=d1
-	print(d)
-	# header='OAuth ' + pageToken
-	# url="https://graph.facebook.com/"+pageId
-	# urll=url+"/location"
-	# details1=call('POST', url, data=d1, headers={"Authorization":header})
-	# details=call('POST', url,data=d, headers={"Authorization": header})
-	return HttpResponse(json.dumps(d.json()))
 

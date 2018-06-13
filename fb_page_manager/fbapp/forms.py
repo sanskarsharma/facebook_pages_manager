@@ -2,6 +2,7 @@ from django import forms
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit, Layout, Field
 
+# not used
 class SimpleForm(forms.Form):
     name = forms.CharField(label="Page Name", required=False)
     about = forms.CharField(label="About Page", required=False)
@@ -25,6 +26,7 @@ class SimpleForm(forms.Form):
     )
 
 
+#################  FB API RESPONSE DETAILS BEWLOWWWWWWWWWWWWWWWWWWWWWWW
 
 '''
 fb page categories
