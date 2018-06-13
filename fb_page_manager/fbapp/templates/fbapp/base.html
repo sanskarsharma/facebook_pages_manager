@@ -89,9 +89,7 @@
                 document.getElementById("access_token").value=accessToken;
                 document.getElementById("loginform").submit();
             }
-            // else {
-            // 	alert('Please login to continue!!!');
-            // }
+
         }
 
 
@@ -178,7 +176,6 @@
 
 
     $('#modal_edit_button').click(function() {
-      //var dr={'access_token':document.getElementById("pageToken").value, 'pageId':document.getElementById("id").value, 'csrfmiddlewaretoken': '{{ csrf_token}}'};
       var d={'csrfmiddlewaretoken': '{{ csrf_token}}','access_token':document.getElementById("pageToken").value, 'pageId':document.getElementById("id").value};
       var c=0;
       var dl={};
@@ -327,28 +324,9 @@
 
       console.log(d);
       d['location']= dl;
-      //d = $.param(d);
       if(c!=0 && flag!=0)
       {
-       // var xhttp = new XMLHttpRequest();
-       //  xhttp.onreadystatechange = function() {
-       //    if (this.readyState == 4 && this.status == 200) {
-       //      var r=JSON.parse(this.responseText);
-       //      console.log(r);
-       //      if(r['success'])
-       //      {
-       //        alert('done');
-       //      }
-       //      else
-       //      {
-       //        alert(r['error']['message']);
-       //      }
-       //    }
-       //  };
-       //  var url=document.getElementById("id").value;
-       //  xhttp.open("POST", "https://graph.facebook.com/", true);
-       //  xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-       //  xhttp.send(d);
+
        var url="/"+document.getElementById("id").value;
        FB.api(url,'post',d, function(response) {
           console.log(response);
@@ -384,8 +362,6 @@
             var button='<td><button data-toggle="modal" data-target="#modal1" class="btn-outline-primary btn page modal-trigger" id="' + i + '">Update</button></td></tr>';
             var name='<td>' + v.name +'</td>';
             var ph='<td>'+ v.phone + '</td>';
-            // var location='<td>' + v.location+'</td>';
-            // console.log(v.location);
             var row='<tr><td> <i class="fa fa-facebook-official" style="font-size:36px; padding: 4px; background: #3b5998; color: white;"></i> </td>  <td>Facebook</td>'+name+'<td>Connought Place</td><td>FB City</td><td>9876543210</td><td>4/5</td><td>No</td><td><i class="material-icons green-text text-darken-4">check</i></td>' + button;
             $('#tabl tr:last').after(row);
         });
@@ -429,9 +405,7 @@
           $.each(res, function(key, value) {
               if(key=='location')
               {
-                // var temp='';
                 $.each(res.location, function(k,v) {
-                  // temp+=k+': '+v+' ';
                   if(k=='name' || k=='latitude' || k=='longitude' || k=='located_in')
                   {
                     ;
@@ -441,7 +415,6 @@
                     document.getElementById(k).value=v;
                   }
                 });
-               // document.getElementById(key).value=temp;
               }
               else{
                   if(document.getElementById(key)){
@@ -459,7 +432,6 @@
             }
         };
         var parm='pageId='+x[parseInt(id)].id + '&pageToken=' + x[parseInt(id)].access_token + '&csrfmiddlewaretoken=' + '{{csrf_token}}';
-        // console.log(parm);
         xhttp.open("POST", "/fbapp/page_detail", false);
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xhttp.send(parm);
@@ -511,7 +483,7 @@
                     <div class="modal-body">
                         This is an app for managing primary information of Facebook Pages of any FB user account.
                         <br>
-                        It is made upon python Django framework and uses Bootstrap-4/jQuery on the frontend.
+                        It is made upon python Django framework and uses Bootstrap-4 with jQuery on the frontend.
                         <br>
                         Facebook's Graph API and Javascript SDK are used to connect to facebook.
                         <br>
