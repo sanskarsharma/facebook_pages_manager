@@ -18,7 +18,7 @@
   <div class="col-md-2" align="end">
       <div class="dropdown">
           <button type="button" id = "dropdown_text" class="btn btn-md btn-outline-primary dropdown-toggle" data-toggle="dropdown">
-          San Jose, CA
+          All Locations
           </button>
           <div class="dropdown-menu">
               <a class="dropdown-item" href="#">San Jose, CA</a>
@@ -67,7 +67,7 @@
             <td>111-111-1111</td>
             <td>3/5</td>
             <td>Yes</td>
-            <td><a href="#"><span class="glyphicon glyphicon-ok" style="color:green;"></span></a></td>
+            <td><a href="#"><i class="material-icons green-text text-darken-4">priority_high</i></a></td>
             <td></td>
           </tr>
           <tr>
@@ -79,7 +79,7 @@
             <td>223.222.2222</td>
             <td>4/5</td>
             <td>No</td>
-            <td><a href="#"><span class="glyphicon glyphicon-ok"></span></a></td>
+            <td><a href="#"><i class="material-icons green-text text-darken-4">priority_high</i></a></td>
             <td></td>
           </tr>
           <tr>
@@ -91,7 +91,19 @@
             <td>3333-333-3333</td>
             <td>3/5</td>
             <td>No</td>
-            <td><a href="#"><span class="glyphicon glyphicon-ok"></span></a></td>
+            <td><a href="#"><i class="material-icons green-text text-darken-4">priority_high</i></a></td>
+            <td></td>
+          </tr>
+           <tr>
+            <td><i class="fa fa-foursquare" style="font-size:36px" > </i></td>
+            <td>FourSquare</td>
+            <td>ABC Dental Clinic</td>
+            <td>C2, Amrapali Sapphire</td>
+            <td>Raipur, IN</td>
+            <td>3333-333-3333</td>
+            <td>3/5</td>
+            <td>No</td>
+            <td><a href="#"><i class="material-icons green-text text-darken-4">priority_high</i></a></td>
             <td></td>
           </tr>
         </tbody>
@@ -105,6 +117,8 @@
 <!--<a id="asd" href="/fbapp/update_form?id=" target="_blank">-->
 <!--Google-->
 <!--</a>-->
+
+
 <!--<div class="row">-->
 <!--    <div class="col-md-12" style="word-wrap:break-word">-->
 <!--        {{pages}}-->
@@ -119,13 +133,20 @@
 
  <!-- The Modal -->
  <div class=" modal" id="modal1">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog modal-lg" >
       <div class="modal-content">
 
         <!-- Modal Header -->
         <div class="modal-header">
           <h4 class="modal-title" id="name_modal"></h4>
+            <span style="display:inline-block; width: 15px;"></span>
+
+           <button hidden id="modal_edit_button" type="button" class="btn btn-primary" data-target="_blank" align="start">Save</button>
+          <button id="editPage" type="button" class="btn btn-outline-primary" data-target="_blank" align="start" >Edit</button>
+
+
           <button type="button" class="close" data-dismiss="modal">&times;</button>
+
         </div>
 
         <div>
@@ -134,126 +155,153 @@
           <br>
 
 
-            <div class="input-field col s12">
-              <label for="name">Name</label>
-              <input disabled placeholder="Name" id="name" type="text" class="validate">
-            </div>
+            <!--<div class="input-field col s12">-->
+            <!--  <label for="name">Name</label>-->
+            <!--  <input disabled placeholder="Name" id="name" type="text" class="validate">-->
+            <!--</div>-->
 
-            <div class="row">
-                <div class="input-field col s12">
-                  <input disabled id="category" type="text" placeholder="Category" class="validate">
-                  <label for="category">Category</label>
+            <!--<div class="row">-->
+            <!--    <div class="input-field col s12">-->
+            <!--      <input disabled id="category" type="text" placeholder="Category" class="validate">-->
+            <!--      <label for="category">Category</label>-->
+            <!--    </div>-->
+            <!--</div>-->
+
+            <div class="row" >
+
+                <div class="input-field col-sm-4">
+                    <label for="overall_star_rating"> Star Ratings</label>
+                  <input disabled id="overall_star_rating" type="text" class="validate" placeholder="Ratings">
                 </div>
+
+                 <div class="input-field col-sm-4">
+                   <label for="rating_count">Rating Count</label>
+                  <input disabled id="rating_count" type="text" class="validate" placeholder="Rating Count">
+                </div>
+
+                <div class="input-field col-sm-4">
+                    <label for="fan_count">Total Likes(fan count)</label>
+                  <input disabled id="fan_count" type="text" class="validate" placeholder="Fan Count">
+                </div>
+
+          </div>
+
+
+            <br>
+
+          <div class="row">
+            <div class="input-field col-sm-12">
+                <label for="link">Page Link : </label>
+              <a id="link" class="validate" placeholder="Link"></a>
             </div>
+          </div>
+
+          <br>
+
+         <!-- <div class="row">-->
+         <!--   <div class="input-field col s12">-->
+         <!--     <input disabled id="displayed_message_response_time" type="text" class="validate" placeholder="displayed_message_response_time">-->
+         <!--     <label for="displayed_message_response_time">Displayed response time</label>-->
+         <!--   </div>-->
+         <!-- </div>-->
+
+         <div class="row">
+
+            <div class="input-field col-sm-6">
+                <label for="is_published">Is Published ?</label>
+              <input disabled id="is_published" type="text" class="validate" placeholder="is_published">
+            </div>
+
+            <div class="input-field col-sm-6">
+                <label for="verification_status">Verification Status</label>
+              <input disabled id="verification_status" type="text" class="validate" placeholder="verification_status">
+            </div>
+
+
+          </div>
+
+            <br>
+
+          <div class="row">
+
+          </div>
 
             <div class="row">
-            <div class="input-field col s12">
-              <input disabled id="overall_star_rating" type="text" class="validate" placeholder="Ratings">
-              <label for="overall_star_rating"> Star Ratings</label>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="input-field col s12">
-              <input disabled id="rating_count" type="text" class="validate" placeholder="Rating Count">
-              <label for="rating_count">Rating Count</label>
-            </div>
-          </div>
-
-
-          <div class="row">
-            <div class="input-field col s12">
-              <input disabled id="fan_count" type="text" class="validate" placeholder="Fan Count">
-              <label for="fan_count">Fan Count</label>
-            </div>
-          </div>
-
-
-          <div class="row">
-            <div class="input-field col s12">
-              <input disabled id="link" type="text" class="validate" placeholder="Link">
-              <label for="link">Link</label>
-            </div>
-          </div>
-
-
-
-            <div class="row">
-                <div class="input-field col-sm-12">
+                <div class="input-field col-sm-6">
                   <label for="phone">Phone Number</label>
-                  <input disabled id="phone" type="text" class="validate rounded" placeholder="Phone">
+                  <input disabled id="phone" type="number" class="validate" placeholder="Phone">
                 </div>
-             </div>
 
-             <div class="row">
-                <div class="input-field col-sm-12">
+                <div class="input-field col-sm-6">
                   <label for="whatsapp_number">Whatsapp Number</label>
-                  <input disabled id="whatsapp_number" type="text" class="validate rounded" placeholder="whatsapp_number">
+                  <input disabled id="whatsapp_number" type="number" class="validate" placeholder="Not Given">
                 </div>
+
              </div>
 
+             <br>
 
                 <div class="row">
-                <div class="input-field col s12">
-                    <label for="website">Website</label>
+                <div class="input-field col-sm-12">
+                    <label for="website">Website : </label>
                   <input disabled id="website" type="text" class="validate" placeholder="Website">
                 </div>
               </div>
-
+<br>
               <div class="row">
-                <div class="col s12">
+                <div class="col-sm-12">
                   <div class="input-field inline">
-                      <label for="emails" data-error="wrong" data-success="right">Email</label>
+                      <label for="emails" data-error="wrong" data-success="right">Email : </label>
                     <input disabled id="emails" type="email" class="validate" placeholder="email">
                   </div>
                 </div>
                 </div>
 
-
+                <br>
 
 
 
               <div class="row">
-                <div class="input-field col s12">
-                  <label for="general_info">General Info</label>
-                  <input disabled id="general_info" type="text" class="validate" placeholder="general_info">
+                <div class="input-field col-sm-12">
+                  <label for="general_info">General Info :</label><br>
+                  <textarea disabled id="general_info" type="text" class="validate" placeholder="general_info" rows="3" style="width:90%; max-width:90%;"></textarea>
                 </div>
               </div>
 
               <div class="row">
-                <div class="input-field col s12">
-                    <label for="about">About</label>
-                  <input disabled id="about" type="text" class="validate" placeholder="About">
+                <div class="input-field col-sm-12">
+                    <label for="about">About :</label><br>
+                  <textarea disabled id="about" type="text" class="validate" placeholder="about" rows="3" style="width:90%; max-width:90%;"></textarea>
                 </div>
               </div>
 
 
               <div class="row">
-                <div class="input-field col s12">
-                    <label for="bio">Bio</label>
-                  <input disabled id="bio" type="text" class="validate" placeholder="Bio">
+                <div class="input-field col-sm-12">
+                    <label for="bio">Bio :</label><br>
+                  <textarea disabled id="bio" type="text" class="validate" placeholder="bio" rows="3" style="width:90%; max-width:90%;"></textarea>
                 </div>
               </div>
 
              <div class="row">
-                <div class="input-field col s12">
-                    <label for="description">Description</label>
-                  <input disabled id="description" type="text" class="validate" placeholder="Description">
+                <div class="input-field col-sm-12">
+                    <label for="description">Description :</label><br>
+                  <textarea disabled id="description" type="text" class="validate" placeholder="description" rows="3" style="width:90%; max-width:90%;"></textarea>
                 </div>
               </div>
 
 
               <div class="row">
-                <div class="input-field col s12">
-                    <label for="company_overview">Company Overview</label>
-                  <input disabled id="company_overview" type="text" class="validate" placeholder="Company Overview">
+                <div class="input-field col-sm-12">
+                    <label for="company_overview">Company Overview :</label><br>
+                  <textarea disabled id="company_overview" type="text" class="validate" placeholder="company_overview" rows="3" style="width:90%; max-width:90%;"></textarea>
                 </div>
               </div>
 
               <div class="row">
-                <div class="input-field col s12">
-                    <label for="impressum">Impressum</label>
-                  <input disabled id="impressum" type="text" class="validate" placeholder="impressum">
+                <div class="input-field col-sm-12">
+                    <label for="impressum">Impressum :</label><br>
+                  <textarea disabled id="impressum" type="text" class="validate" placeholder="impressum" rows="3" style="width:90%; max-width:90%;"></textarea>
                 </div>
               </div>
 
@@ -263,40 +311,41 @@
 
 
 
-               Address<br>
+               Address <br><br>
 
           <div class="row">
-                 <div class="input-field col s4">
-                  <input id="lname" type="text" class="validate" placeholder="lname">
-                  <label for="lname">Name</label>
-                </div>
 
-                <div class="input-field col s8">
+                <div class="input-field col-sm-4">
+                    <label for="street">Street : </label><br>
                   <input disabled id="street" type="text" class="validate" placeholder="street">
-                  <label for="street">Street</label>
                 </div>
 
-                <div class="input-field col s4">
+                <div class="input-field col-sm-4">
+                    <label for="city">City : </label><br>
                   <input disabled id="city" type="text" class="validate" placeholder="city">
-                  <label for="city">City</label>
                 </div>
+
+                 <div class="input-field col-sm-4">
+                      <label for="zip">Zip : </label><br>
+                      <input disabled id="zip" type="text" class="validate" placeholder="zip">
+                </div>
+
           </div>
 
+            <br>
+
           <div class="row">
-                <div class="input-field col s4">
+                <div class="input-field col-sm-4">
+                    <label for="state">State : </label><br>
                   <input disabled id="state" type="text" class="validate" placeholder="state">
-                  <label for="state">State</label>
                 </div>
 
-                <div class="input-field col s4">
+                <div class="input-field col-sm-4">
+                    <label for="country">Country : </label><br>
                   <input disabled id="country" type="text" class="validate" placeholder="country">
-                  <label for="country">Country</label>
                 </div>
 
-                <div class="input-field col s4">
-                  <input disabled id="zip" type="text" class="validate" placeholder="zip">
-                  <label for="zip">Zip</label>
-                </div>
+
           </div>
 
 
@@ -311,8 +360,7 @@
 
         <!-- Modal footer -->
         <div class="modal-footer">
-          <button hidden id="modal_edit_button" type="button" class="btn btn-primary" data-target="_blank">Confirm</button>
-          <button id="editPage" type="button" class="btn btn-primary" data-target="_blank">Edit</button>
+
         </div>
 
 

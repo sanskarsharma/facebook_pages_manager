@@ -10,6 +10,10 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.js"></script>
+
+
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
     <!-- For jQuery -->
@@ -189,7 +193,7 @@
         }
         else
         {
-          alert("Please enter a valid 10 digit phone number!");
+          $.alert('Please enter a valid 10 digit phone number', 'Inavlid Input');
           flag=0;
         }
       }
@@ -199,12 +203,13 @@
       {
         if(document.getElementById("whatsapp_number").value.length==10 && !isNaN(document.getElementById("whatsapp_number").value))
         {
+          d['has_whatsapp_number']= true;
           d['whatsapp_number']= document.getElementById("whatsapp_number").value;
           c+=1;
         }
         else
         {
-          alert("Please enter a valid 10 digit phone number for Whatsapp!");
+          $.alert('Please enter a valid 10 digit Whatsapp number', 'Inavlid Input');
           flag=0;
         }
       }
@@ -220,13 +225,17 @@
         }
         else
         {
-          alert("Please enter a valid website URL !");
+          $.alert('Please enter a valid website URL', 'Inavlid Input');
           flag=0;
         }
-      }
+      }else
+        {
+          $.alert('Please enter a valid website URL', 'Inavlid Input');
+          flag=0;
+        }
 
 
-      if(document.getElementById("emails").value != "")
+      if(document.getElementById("emails").value.length >=5 )
       {
         var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         if(re.test(document.getElementById("emails").value))
@@ -236,10 +245,16 @@
         }
         else
         {
-          alert("Please enter a valid email ID");
+            $.alert('Please enter a valid email ID', 'Inavlid Input');
+          //alert("Please enter a valid email ID");
           flag=0;
         }
-      }
+      }else
+        {
+            $.alert('Please enter a valid email ID', 'Inavlid Input');
+          //alert("Please enter a valid email ID");
+          flag=0;
+        }
 
 
       if(document.getElementById("general_info").value != "")
@@ -339,11 +354,11 @@
           console.log(response);
           if(response['success'])
             {
-              alert('done');
+              $.alert('Page details were updated successfully !', 'Changes Saved ');
             }
             else
             {
-              alert(response['error']['message']);
+                $.alert(response['error']['message'], 'Error !!!');
             }
         });
       }
@@ -371,7 +386,7 @@
             var ph='<td>'+ v.phone + '</td>';
             // var location='<td>' + v.location+'</td>';
             // console.log(v.location);
-            var row='<tr><td> <i class="fa fa-facebook-official" style="font-size:36px; padding: 4px; background: #3b5998; color: white;"></i> </td>  <td>Facebook</td>'+name+'<td>7 race course road, NDLS</td><td>FB City</td><td>9876543210</td><td>4/5</td><td>No</td><td><i class="material-icons green-text text-darken-4">check</i></td>' + button;
+            var row='<tr><td> <i class="fa fa-facebook-official" style="font-size:36px; padding: 4px; background: #3b5998; color: white;"></i> </td>  <td>Facebook</td>'+name+'<td>Connought Place</td><td>FB City</td><td>9876543210</td><td>4/5</td><td>No</td><td><i class="material-icons green-text text-darken-4">check</i></td>' + button;
             $('#tabl tr:last').after(row);
         });
 
@@ -417,7 +432,7 @@
                 // var temp='';
                 $.each(res.location, function(k,v) {
                   // temp+=k+': '+v+' ';
-                  if(k=='name' || k=='latitude' || k=='longitude')
+                  if(k=='name' || k=='latitude' || k=='longitude' || k=='located_in')
                   {
                     ;
                   }
@@ -429,7 +444,14 @@
                // document.getElementById(key).value=temp;
               }
               else{
-                  document.getElementById(key).value=value;
+                  if(document.getElementById(key)){
+                      if(key=="link"){
+                          $("a#"+key).attr("href",value)
+                          document.getElementById(key).innerHTML=value;
+                      }
+                        document.getElementById(key).value=value;
+
+                  }
               }
           });
 
