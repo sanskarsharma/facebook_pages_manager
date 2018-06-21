@@ -2,3 +2,4 @@ virtualenv
 fb_page_manager/fb_page_manager/__pycache__/
 fb_page_manager/fbapp/__pycache__/
 fb_page_manager/fbapp/migrations/__pycache__/
+frontend_wireframe.png
